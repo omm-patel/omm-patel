@@ -1,26 +1,84 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FFFFFF;
+  --foreground: #111111;
+  
+  /* Luxury Monochrome Color System */
+  --bg-pure: #FFFFFF;
+  --bg-ice: #FCFCFC;
+  --bg-soft: #FAFAFA;
+  --bg-cloud: #F5F5F5;
+  --border-lux: #EAEAEA;
+  
+  --text-primary: #111111;
+  --text-secondary: rgba(17, 17, 17, 0.60);
+  --text-muted: rgba(17, 17, 17, 0.40);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  
+  --color-bg-pure: var(--bg-pure);
+  --color-bg-ice: var(--bg-ice);
+  --color-bg-soft: var(--bg-soft);
+  --color-bg-cloud: var(--bg-cloud);
+  --color-border-lux: var(--border-lux);
+  
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  
+  --font-serif: var(--font-fraunces), serif;
+  --font-sans: var(--font-inter), sans-serif;
+  --font-mono: var(--font-space-mono), monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-pure);
+  color: var(--text-primary);
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Custom styles for high-end editorial look */
+.font-editorial-heading {
+  font-family: var(--font-fraunces), serif;
+}
+
+.font-editorial-label {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Smooth selection and scrollbar styling */
+::selection {
+  background-color: #111111;
+  color: #FFFFFF;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-pure);
+}
+::-webkit-scrollbar-thumb {
+  background: #EAEAEA;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(17, 17, 17, 0.2);
+}
+
+/* Custom smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
