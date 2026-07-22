@@ -87,7 +87,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="md:col-span-3 space-y-3">
-            <span className="font-mono text-[12px] uppercase tracking-wider text-black/80 block">
+            <span className="font-mono text-[12px] uppercase tracking-wider text-text-primary block">
               NAVIGATE
             </span>
             <ul className="space-y-2">
@@ -113,7 +113,7 @@ export default function Footer() {
 
           {/* Social Links Column */}
           <div className="md:col-span-3 space-y-3">
-            <span className="font-mono text-[12px] uppercase tracking-wider text-black/80 block">
+            <span className="font-mono text-[12px] uppercase tracking-wider text-text-primary block">
               FOLLOW
             </span>
             <ul className="space-y-2">

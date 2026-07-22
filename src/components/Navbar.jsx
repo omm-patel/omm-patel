@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, FileText, Mail, Phone } from 'lucide-react';
+import { Menu, X, FileText, Mail, Phone, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const GithubIcon = ({ className = "w-3 h-3" }) => (
@@ -19,6 +19,26 @@ const LinkedinIcon = ({ className = "w-3 h-3" }) => (
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [theme, setTheme] = useState('light');
+
+  // Sync state with DOM/localStorage on mount
+  useEffect(() => {
+    const isDark = document.documentElement.classList.contains('dark');
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setTheme(isDark ? 'dark' : 'light');
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(nextTheme);
+    if (nextTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  };
 
   // Prevent body scrolling when mobile menu is open
   useEffect(() => {
@@ -73,7 +93,7 @@ export default function Navbar() {
 
         {/* Hamburger (Mobile navigation toggle) */}
         <button
-          className="md:hidden text-text-primary p-2 -ml-2 focus:outline-none hover:scale-105 active:scale-95 transition-transform"
+          className="md:hidden text-text-primary p-2 -ml-2 focus:outline-none hover:scale-105 active:scale-95 transition-transform cursor-pointer"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -87,7 +107,7 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Right: Socials & Resume */}
+        {/* Right: Socials, Resume & Theme Toggle */}
         <div className="hidden sm:flex items-center gap-6">
           <a
             href="https://github.com/omm-patel"
@@ -114,10 +134,37 @@ export default function Navbar() {
             <FileText size={12} />
             <span>Resume</span>
           </Link>
+
+          {/* Theme Toggle Button */}
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            className="p-1 text-text-secondary hover:text-text-primary flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 group"
+          >
+            {theme === 'dark' ? (
+              <Sun
+                size={14}
+                className="transition-transform duration-300 group-hover:rotate-45"
+              />
+            ) : (
+              <Moon
+                size={14}
+                className="transition-transform duration-300 group-hover:-rotate-12"
+              />
+            )}
+          </button>
         </div>
         
-        {/* Quick mobile right links */}
+        {/* Quick mobile right links including Theme Toggle */}
         <div className="sm:hidden flex items-center gap-3">
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="p-1 text-text-secondary hover:text-text-primary transition-all duration-300 flex items-center justify-center cursor-pointer"
+          >
+            {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+          </button>
           <a href="https://github.com/omm-patel" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-text-primary transition-all duration-300 hover:scale-110">
             <GithubIcon className="w-4 h-4" />
           </a>
@@ -153,13 +200,22 @@ export default function Navbar() {
                 <span className="font-serif text-sm tracking-[0.2em] text-text-primary font-normal">
                   OM PATEL
                 </span>
-                <button
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-1.5 border border-border-lux hover:border-text-primary transition-colors flex items-center justify-center"
-                  aria-label="Close menu"
-                >
-                  <X size={16} />
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={toggleTheme}
+                    className="p-1 text-text-secondary hover:text-text-primary transition-colors flex items-center justify-center cursor-pointer"
+                    aria-label="Toggle theme"
+                  >
+                    {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+                  </button>
+                  <button
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-1 text-text-secondary hover:text-text-primary transition-colors flex items-center justify-center cursor-pointer"
+                    aria-label="Close menu"
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
               </div>
 
               {/* Navigation Links */}

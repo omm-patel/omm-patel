@@ -23,6 +23,7 @@ const LinkedinIcon = ({ className = "w-4 h-4" }) => (
 const contactSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters' }),
   email: z.string().email({ message: 'Please enter a valid email address' }),
+  subject: z.string().min(3, { message: 'Subject must be at least 3 characters' }),
   message: z.string().min(10, { message: 'Message must be at least 10 characters' }),
 });
 
@@ -40,11 +41,29 @@ export default function Contact() {
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    toast.success('Your message has been received. Thank you.');
-    reset();
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        toast.success('Message sent successfully.');
+        reset();
+      } else {
+        toast.error('Failed to send message.');
+      }
+    } catch (error) {
+      console.error('Submit contact form error:', error);
+      toast.error('Failed to send message.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactCards = [
@@ -160,6 +179,26 @@ export default function Contact() {
                 {errors.email && (
                   <span className="font-mono text-[10px] text-text-primary underline decoration-dotted block mt-1">
                     {errors.email.message}
+                  </span>
+                )}
+              </div>
+
+              {/* Subject Input */}
+              <div className="space-y-1 relative">
+                <label htmlFor="subject" className="font-mono text-[10px] uppercase tracking-wider text-text-secondary block">
+                  Subject
+                </label>
+                <input
+                  id="subject"
+                  type="text"
+                  placeholder="Project Inquiry / Job Opportunity"
+                  {...register('subject')}
+                  disabled={isSubmitting}
+                  className="w-full bg-transparent border-b border-border-lux focus:border-text-primary outline-none py-2 text-sm font-sans text-text-primary transition-colors rounded-none placeholder-text-muted/50 disabled:opacity-50"
+                />
+                {errors.subject && (
+                  <span className="font-mono text-[10px] text-text-primary underline decoration-dotted block mt-1">
+                    {errors.subject.message}
                   </span>
                 )}
               </div>

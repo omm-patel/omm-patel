@@ -40,7 +40,27 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       className={`${fraunces.variable} ${inter.variable} ${spaceMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var savedTheme = localStorage.getItem('theme');
+                  var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col font-sans bg-bg-pure text-text-primary">
         <Navbar />
         <main className="flex-1 w-full">
@@ -49,9 +69,9 @@ export default function RootLayout({ children }) {
         <Footer />
         <Toaster position="bottom-right" toastOptions={{
           style: {
-            background: "#FFFFFF",
-            color: "#111111",
-            border: "1px solid #EAEAEA",
+            background: "var(--bg-pure)",
+            color: "var(--text-primary)",
+            border: "1px solid var(--border-lux)",
             borderRadius: "0px",
             fontFamily: "var(--font-space-mono)",
             fontSize: "0.75rem",

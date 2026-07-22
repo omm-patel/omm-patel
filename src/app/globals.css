@@ -4,7 +4,7 @@
   --background: #FFFFFF;
   --foreground: #111111;
   
-  /* Luxury Monochrome Color System */
+  /* Luxury Light Monochrome Color System */
   --bg-pure: #FFFFFF;
   --bg-ice: #FCFCFC;
   --bg-soft: #FAFAFA;
@@ -12,8 +12,24 @@
   --border-lux: #EAEAEA;
   
   --text-primary: #111111;
-  --text-secondary: rgba(17, 17, 17, 0.60);
-  --text-muted: rgba(17, 17, 17, 0.40);
+  --text-secondary: rgba(17, 17, 17, 0.65);
+  --text-muted: rgba(17, 17, 17, 0.45);
+}
+
+.dark {
+  --background: #050505;
+  --foreground: #FFFFFF;
+  
+  /* Luxury Dark Monochrome Color System */
+  --bg-pure: #050505;
+  --bg-ice: #0A0A0A;
+  --bg-soft: #111111;
+  --bg-cloud: #171717;
+  --border-lux: #2A2A2A;
+  
+  --text-primary: #FFFFFF;
+  --text-secondary: #D4D4D4;
+  --text-muted: #A3A3A3;
 }
 
 @theme inline {
@@ -42,6 +58,21 @@ body {
   font-family: var(--font-inter), sans-serif;
   overflow-x: hidden;
   max-width: 100%;
+  transition: background-color 250ms ease, color 250ms ease, border-color 250ms ease;
+}
+
+header, section, footer, main, nav, div, button, a, input, textarea, span {
+  transition: background-color 250ms ease, color 250ms ease, border-color 250ms ease;
+}
+
+/* Global button focus reset for minimal luxury aesthetic */
+button:focus,
+button:focus-visible,
+a:focus,
+a:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Custom styles for high-end editorial look */
@@ -62,6 +93,11 @@ body {
   color: #FFFFFF;
 }
 
+.dark ::selection {
+  background-color: #FFFFFF;
+  color: #050505;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -71,11 +107,11 @@ body {
   background: var(--bg-pure);
 }
 ::-webkit-scrollbar-thumb {
-  background: #EAEAEA;
+  background: var(--border-lux);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(17, 17, 17, 0.2);
+  background: var(--text-muted);
 }
 
 /* Custom smooth scrolling */
