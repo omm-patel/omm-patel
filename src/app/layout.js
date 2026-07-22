@@ -61,7 +61,7 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col font-sans bg-bg-pure text-text-primary">
+      <body className="min-h-full flex flex-col font-sans bg-bg-pure text-text-primary" suppressHydrationWarning>
         <Navbar />
         <main className="flex-1 w-full">
           {children}

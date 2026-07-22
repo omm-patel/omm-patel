@@ -121,7 +121,7 @@ export default function Contact() {
                   href={card.href}
                   target={card.label === 'GitHub' || card.label === 'LinkedIn' ? '_blank' : undefined}
                   rel="noopener noreferrer"
-                  className="flex flex-col justify-between p-5 border border-border-lux bg-bg-soft hover:bg-bg-pure hover:border-text-primary hover:scale-[1.02] transition-all duration-300 rounded-none group aspect-[4/3]"
+                  className="flex flex-col justify-between p-5 border border-border-lux bg-bg-soft hover:bg-bg-pure hover:border-text-primary card-hover-depth transition-all duration-300 rounded-none group aspect-[4/3]"
                 >
                   <div className="flex justify-between items-center mb-4">
                     <span className="font-mono text-[9px] uppercase tracking-widest text-text-muted">
@@ -140,7 +140,7 @@ export default function Contact() {
           </div>
 
           {/* Right Column: Contact Form */}
-          <div className="lg:col-span-7 w-full border border-border-lux bg-bg-soft p-8 md:p-12">
+          <div className="lg:col-span-7 w-full border border-border-lux bg-bg-soft p-8 md:p-12 form-depth">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
               
               {/* Name Input */}

@@ -99,7 +99,7 @@ export default function FeaturedProjects() {
               >
                 {/* Image Column (order-1 stacks on mobile, lg:order-x applies alternating order on desktop) */}
                 <div className={`order-1 lg:col-span-7 ${isEven ? 'lg:order-1' : 'lg:order-2'} w-full`}>
-                  <div className="relative aspect-[16/10] w-full overflow-hidden border border-border-lux bg-bg-cloud group">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden border border-border-lux bg-bg-cloud group card-hover-depth">
                     <div className="absolute inset-0 bg-[#111111]/5 z-10 pointer-events-none mix-blend-overlay" />
                     <img
                       src={project.image}

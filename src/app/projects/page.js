@@ -123,7 +123,7 @@ export default function ProjectsPage() {
               >
                 {/* Visual Column */}
                 <div className="lg:col-span-6 w-full space-y-4">
-                  <div className="relative aspect-[16/10] w-full overflow-hidden border border-border-lux bg-bg-cloud group">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden border border-border-lux bg-bg-cloud group card-hover-depth">
                     <img
                       src={project.image}
                       alt={project.title}

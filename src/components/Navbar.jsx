@@ -19,12 +19,14 @@ const LinkedinIcon = ({ className = "w-3 h-3" }) => (
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [theme, setTheme] = useState('light');
 
   // Sync state with DOM/localStorage on mount
   useEffect(() => {
-    const isDark = document.documentElement.classList.contains('dark');
     // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+    const isDark = document.documentElement.classList.contains('dark');
     setTheme(isDark ? 'dark' : 'light');
   }, []);
 
@@ -139,10 +141,13 @@ export default function Navbar() {
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            className="p-1 text-text-secondary hover:text-text-primary flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 group"
+            title={mounted ? (theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode') : 'Toggle theme'}
+            className="p-1 text-text-secondary hover:text-text-primary flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 group min-w-[24px] min-h-[24px]"
+            suppressHydrationWarning
           >
-            {theme === 'dark' ? (
+            {!mounted ? (
+              <Sun size={14} className="opacity-0" />
+            ) : theme === 'dark' ? (
               <Sun
                 size={14}
                 className="transition-transform duration-300 group-hover:rotate-45"
@@ -161,9 +166,16 @@ export default function Navbar() {
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="p-1 text-text-secondary hover:text-text-primary transition-all duration-300 flex items-center justify-center cursor-pointer"
+            className="p-1 text-text-secondary hover:text-text-primary transition-all duration-300 flex items-center justify-center cursor-pointer min-w-[24px] min-h-[24px]"
+            suppressHydrationWarning
           >
-            {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+            {!mounted ? (
+              <Sun size={15} className="opacity-0" />
+            ) : theme === 'dark' ? (
+              <Sun size={15} />
+            ) : (
+              <Moon size={15} />
+            )}
           </button>
           <a href="https://github.com/omm-patel" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-text-primary transition-all duration-300 hover:scale-110">
             <GithubIcon className="w-4 h-4" />
@@ -193,7 +205,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 left-0 h-screen z-[100] w-[85vw] max-w-[380px] bg-bg-pure border-r border-border-lux flex flex-col gap-8 p-6 shadow-2xl md:hidden overflow-y-auto"
+              className="fixed top-0 left-0 h-screen z-[100] w-[85vw] max-w-[380px] bg-bg-pure border-r border-border-lux flex flex-col gap-8 p-6 drawer-depth md:hidden overflow-y-auto"
             >
               {/* Header row */}
               <div className="flex items-center justify-between border-b border-border-lux pb-4">
@@ -203,10 +215,17 @@ export default function Navbar() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={toggleTheme}
-                    className="p-1 text-text-secondary hover:text-text-primary transition-colors flex items-center justify-center cursor-pointer"
+                    className="p-1 text-text-secondary hover:text-text-primary transition-colors flex items-center justify-center cursor-pointer min-w-[24px] min-h-[24px]"
                     aria-label="Toggle theme"
+                    suppressHydrationWarning
                   >
-                    {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+                    {!mounted ? (
+                      <Sun size={15} className="opacity-0" />
+                    ) : theme === 'dark' ? (
+                      <Sun size={15} />
+                    ) : (
+                      <Moon size={15} />
+                    )}
                   </button>
                   <button
                     onClick={() => setMobileMenuOpen(false)}

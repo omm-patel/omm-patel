@@ -133,7 +133,7 @@ export default function Home() {
                 variants={itemVariants}
                 className="space-y-4 group"
               >
-                <div className="relative aspect-[16/10] w-full overflow-hidden border border-border-lux bg-bg-cloud">
+                <div className="relative aspect-[16/10] w-full overflow-hidden border border-border-lux bg-bg-cloud card-hover-depth">
                   <img
                     src={project.image}
                     alt={project.title}
