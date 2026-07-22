@@ -23,59 +23,121 @@ function generateContactEmailHtml({ name, email, subject, message }) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio Contact Submission</title>
+
+  <style>
+    @media only screen and (max-width: 600px) {
+      .email-wrapper {
+        padding: 16px 8px !important;
+      }
+
+      .email-container {
+        padding: 16px !important;
+      }
+
+      .content-card {
+        padding: 12px !important;
+      }
+
+      .message-card {
+        padding: 14px !important;
+      }
+
+      .header-title {
+        font-size: 20px !important;
+      }
+
+      .message-text {
+        font-size: 15px !important;
+      }
+    }
+  </style>
 </head>
+
 <body style="margin: 0; padding: 0; background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #111111; -webkit-font-smoothing: antialiased;">
-  <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #ffffff; padding: 40px 20px;">
+
+  <table
+    role="presentation"
+    width="100%"
+    border="0"
+    cellspacing="0"
+    cellpadding="0"
+    class="email-wrapper"
+    style="background-color: #ffffff; padding: 40px 16px;"
+  >
     <tr>
       <td align="center">
-        <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 600px; width: 100%; border: 1px solid #e5e5e5; background-color: #ffffff; padding: 32px; box-sizing: border-box;">
-          
+
+        <table
+          role="presentation"
+          width="100%"
+          border="0"
+          cellspacing="0"
+          cellpadding="0"
+          class="email-container"
+          style="max-width: 640px; width: 100%; border: 1px solid #e5e5e5; background-color: #ffffff; padding: 32px; box-sizing: border-box;"
+        >
+
           <!-- Header -->
           <tr>
             <td style="padding-bottom: 20px;">
               <div style="font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #666666; margin-bottom: 6px;">
                 OM PATEL
               </div>
-              <div style="font-size: 22px; font-weight: 500; color: #111111; letter-spacing: -0.5px;">
+
+              <div class="header-title" style="font-size: 22px; font-weight: 500; color: #111111; letter-spacing: -0.5px;">
                 Portfolio Contact Submission
               </div>
             </td>
           </tr>
 
-          <!-- Subtle Divider -->
+          <!-- Divider -->
           <tr>
             <td style="border-bottom: 1px solid #e5e5e5; padding-bottom: 0;"></td>
           </tr>
 
-          <!-- Email Content Cards -->
+          <!-- Content -->
           <tr>
             <td style="padding-top: 24px; padding-bottom: 8px;">
-              
+
               <!-- Name Card -->
-              <div style="padding: 14px 16px; background-color: #fafafa; border: 1px solid #e5e5e5; margin-bottom: 12px;">
+              <div
+                class="content-card"
+                style="padding: 14px 16px; background-color: #fafafa; border: 1px solid #e5e5e5; margin-bottom: 12px;"
+              >
                 <div style="font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #666666; margin-bottom: 4px;">
                   Name
                 </div>
+
                 <div style="font-size: 14px; color: #111111; font-weight: 500;">
                   ${safeName}
                 </div>
               </div>
-              
+
               <!-- Email Card -->
-              <div style="padding: 14px 16px; background-color: #fafafa; border: 1px solid #e5e5e5; margin-bottom: 12px;">
+              <div
+                class="content-card"
+                style="padding: 14px 16px; background-color: #fafafa; border: 1px solid #e5e5e5; margin-bottom: 12px;"
+              >
                 <div style="font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #666666; margin-bottom: 4px;">
                   Email
                 </div>
+
                 <div style="font-size: 14px; color: #111111; font-weight: 500;">
-                  <a href="mailto:${safeEmail}" style="color: #111111; text-decoration: underline;">${safeEmail}</a>
+                  <a href="mailto:${safeEmail}" style="color: #111111; text-decoration: underline;">
+                    ${safeEmail}
+                  </a>
                 </div>
               </div>
 
               <!-- Subject Card -->
-              <div style="padding: 14px 16px; background-color: #fafafa; border: 1px solid #e5e5e5; margin-bottom: 12px;">
+              <div
+                class="content-card"
+                style="padding: 14px 16px; background-color: #fafafa; border: 1px solid #e5e5e5; margin-bottom: 12px;"
+              >
                 <div style="font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #666666; margin-bottom: 4px;">
                   Subject
                 </div>
+
                 <div style="font-size: 14px; color: #111111; font-weight: 500;">
                   ${safeSubject}
                 </div>
@@ -87,18 +149,24 @@ function generateContactEmailHtml({ name, email, subject, message }) {
           <!-- Message Section -->
           <tr>
             <td style="padding-top: 4px; padding-bottom: 24px;">
-              <div style="padding: 18px 16px; background-color: #fafafa; border: 1px solid #e5e5e5;">
+
+              <div
+                class="message-card"
+                style="padding: 18px 16px; background-color: #fafafa; border: 1px solid #e5e5e5;"
+              >
                 <div style="font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #666666; padding-bottom: 10px; margin-bottom: 12px; border-bottom: 1px solid #e5e5e5;">
                   Message
                 </div>
-                <div style="font-size: 14px; line-height: 1.6; color: #111111;">
+
+                <div class="message-text" style="font-size: 14px; line-height: 1.6; color: #111111;">
                   ${safeMessage}
                 </div>
               </div>
+
             </td>
           </tr>
 
-          <!-- Subtle Divider -->
+          <!-- Divider -->
           <tr>
             <td style="border-top: 1px solid #e5e5e5; padding-top: 24px;"></td>
           </tr>
@@ -106,19 +174,27 @@ function generateContactEmailHtml({ name, email, subject, message }) {
           <!-- Footer -->
           <tr>
             <td style="font-size: 12px; line-height: 1.5; color: #666666;">
+
               <div style="margin-bottom: 6px;">
                 This inquiry was submitted through the Om Patel Portfolio website.
               </div>
+
               <div>
-                <strong>Email:</strong> <a href="mailto:om07674@gmail.com" style="color: #666666; text-decoration: underline;">om07674@gmail.com</a>
+                <strong>Email:</strong>
+                <a href="mailto:om07674@gmail.com" style="color: #666666; text-decoration: underline;">
+                  om07674@gmail.com
+                </a>
               </div>
+
             </td>
           </tr>
 
         </table>
+
       </td>
     </tr>
   </table>
+
 </body>
 </html>`;
 }
